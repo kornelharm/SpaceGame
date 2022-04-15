@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Worlds/PlayerCamera.gd" type="Script" id=1]
+[ext_resource path="res://Prefabs/ShipMovement.gd" type="Script" id=2]
+
+[sub_resource type="PrismMesh" id=1]
+
+[node name="Ship" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="ShipModel" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.3932e-08, 0.318727, 0, -2.09381, -9.15235e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CameraPivotH" type="Spatial" parent="."]
+
+[node name="CameraPivotV" type="Spatial" parent="CameraPivotH"]
+
+[node name="Camera" type="Camera" parent="CameraPivotH/CameraPivotV"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+script = ExtResource( 1 )
