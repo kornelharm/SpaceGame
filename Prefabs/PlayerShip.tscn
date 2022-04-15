@@ -14,6 +14,7 @@ mesh = SubResource( 1 )
 material/0 = null
 
 [node name="CameraPivotH" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.9923, 0.123861, 0, -0.123861, 0.9923, 0, 0, 0 )
 
 [node name="CameraPivotV" type="Spatial" parent="CameraPivotH"]
 

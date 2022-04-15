@@ -26,6 +26,6 @@ func _input(event):
 			pivoth.rotate_y(-event.relative.x * camera_sensitivity * 0.004)
 			pivotv.rotate_x(-event.relative.y * camera_sensitivity * 0.004)
 			pivotv.rotation_degrees.x = clamp(pivotv.rotation_degrees.x, -80, 80)
-			look_at(ship.translation, ship.global_transform.basis.y)
+			look_at(ship.translation, pivoth.global_transform.basis.y)
 	else:
 		camera_lock = true

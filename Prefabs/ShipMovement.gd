@@ -1,6 +1,5 @@
 extends Spatial
 
-onready var ship = $ShipModel
 
 var acceleration = 1
 var rotational_acceleration = 1
@@ -54,6 +53,13 @@ func _physics_process(delta):
 		rotate_y(rotational_acceleration * delta)
 	if(Input.is_action_pressed("yaw_right")):
 		rotate_y(-rotational_acceleration * delta)
+		
+	if(Input.is_action_pressed("roll_right")):
+		rotate_z(-rotational_acceleration * delta)
+	if(Input.is_action_pressed("roll_left")):
+		rotate_z(rotational_acceleration * delta)
+		
+	
 		
 	move(delta)
 	
