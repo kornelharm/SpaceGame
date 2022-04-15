@@ -1,7 +1,9 @@
 extends Spatial
 
+onready var ship = $ShipModel
 
 var acceleration = 1
+var rotational_acceleration = 1
 
 var direction
 var velocity = Vector3()
@@ -10,12 +12,16 @@ var right = Vector3()
 var left = Vector3()
 var back = Vector3()
 var forward = Vector3()
+var up = Vector3()
+var down = Vector3()
 
 func establish_directions():
 	forward = -transform.basis.z
 	back = transform.basis.z
 	right = transform.basis.x
 	left = -transform.basis.x
+	up = transform.basis.y
+	down = -transform.basis.y
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,6 +45,15 @@ func _physics_process(delta):
 		velocity += left * acceleration * delta
 	if(Input.is_action_pressed("move_right")):
 		velocity += right * acceleration * delta
+	if(Input.is_action_pressed("move_up")):
+		velocity += up * acceleration * delta
+	if(Input.is_action_pressed("move_down")):
+		velocity += down * acceleration * delta
+		
+	if(Input.is_action_pressed("yaw_left")):
+		rotate_y(rotational_acceleration * delta)
+	if(Input.is_action_pressed("yaw_right")):
+		rotate_y(-rotational_acceleration * delta)
 		
 	move(delta)
 	
