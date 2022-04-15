@@ -1,6 +1,7 @@
 extends Spatial
 
 export var acceleration = 1
+export var decceleration = 0.75
 export var rotational_acceleration = 0.3
 
 var direction
@@ -37,6 +38,8 @@ func move(delta):
 
 func _physics_process(delta):
 	establish_directions()
+	
+	
 	if(Input.is_action_pressed("move_forward")):
 		velocity += forward * acceleration * delta
 	if(Input.is_action_pressed("move_back")):
@@ -64,9 +67,20 @@ func _physics_process(delta):
 		rotate_object_local(Vector3.LEFT, rotational_acceleration * delta)
 	if(Input.is_action_pressed("pitch_down")):
 		rotate_object_local(Vector3.RIGHT, rotational_acceleration * delta)
-		
 	
-		
+	# Velocity of the ship inline with the direction of the front
+	var forward_velocity = velocity - velocity.project(forward)
+	# Velocity of the ship not inline with the direction of the front
+	var drift = velocity - forward_velocity
+	
+	if (drift.length() < 0.1):
+		pass
+		#velocity -= drift
+#	else:
+#		velocity -= drift.normalized() * delta * decceleration
+	
+	velocity -= velocity.normalized() * delta * decceleration
+	
 	move(delta)
 	
 		
