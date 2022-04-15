@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Worlds/PlayerCamera.gd" type="Script" id=1]
+
+[sub_resource type="PrismMesh" id=1]
+
+[sub_resource type="Environment" id=2]
+ambient_light_color = Color( 0.72549, 0.72549, 0.72549, 1 )
+
+[node name="World" type="Spatial"]
+
+[node name="Ship" type="Spatial" parent="."]
+
+[node name="ShipModel" type="MeshInstance" parent="Ship"]
+transform = Transform( 1, 0, 0, 0, -1.3932e-08, 0.318727, 0, -2.09381, -9.15235e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CameraPivotH" type="Spatial" parent="Ship"]
+
+[node name="CameraPivotV" type="Spatial" parent="Ship/CameraPivotH"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Camera" type="Camera" parent="Ship/CameraPivotH/CameraPivotV"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+script = ExtResource( 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
