@@ -1,8 +1,7 @@
 extends Spatial
 
-
-var acceleration = 1
-var rotational_acceleration = 1
+export var acceleration = 1
+export var rotational_acceleration = 0.3
 
 var direction
 var velocity = Vector3()
@@ -15,12 +14,14 @@ var up = Vector3()
 var down = Vector3()
 
 func establish_directions():
+	
 	forward = -transform.basis.z
 	back = transform.basis.z
 	right = transform.basis.x
 	left = -transform.basis.x
 	up = transform.basis.y
 	down = -transform.basis.y
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,14 +51,19 @@ func _physics_process(delta):
 		velocity += down * acceleration * delta
 		
 	if(Input.is_action_pressed("yaw_left")):
-		rotate_y(rotational_acceleration * delta)
+		rotate_object_local(Vector3.UP, rotational_acceleration * delta)
 	if(Input.is_action_pressed("yaw_right")):
-		rotate_y(-rotational_acceleration * delta)
+		rotate_object_local(Vector3.DOWN, rotational_acceleration * delta)
 		
 	if(Input.is_action_pressed("roll_right")):
-		rotate_z(-rotational_acceleration * delta)
+		rotate_object_local(Vector3.FORWARD, rotational_acceleration * delta)
 	if(Input.is_action_pressed("roll_left")):
-		rotate_z(rotational_acceleration * delta)
+		rotate_object_local(Vector3.BACK, rotational_acceleration * delta)
+		
+	if(Input.is_action_pressed("pitch_up")):
+		rotate_object_local(Vector3.LEFT, rotational_acceleration * delta)
+	if(Input.is_action_pressed("pitch_down")):
+		rotate_object_local(Vector3.RIGHT, rotational_acceleration * delta)
 		
 	
 		

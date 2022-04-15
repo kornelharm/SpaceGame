@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Worlds/PlayerCamera.gd" type="Script" id=1]
+
+[node name="ThirdPersonCamera" type="Spatial"]
+
+[node name="CameraPivotH" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.9923, 0.123861, 0, -0.123861, 0.9923, 0, 0, 0 )
+
+[node name="CameraPivotV" type="Spatial" parent="CameraPivotH"]
+
+[node name="Camera" type="Camera" parent="CameraPivotH/CameraPivotV"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+script = ExtResource( 1 )
